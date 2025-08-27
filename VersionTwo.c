@@ -42,7 +42,12 @@ int main() {
 
     insert(L,'x',3);
 
-    printf("\nList with the inserted element:\n");
+    printf("\nList after insertion:\n");
+    printList(L);
+
+    delete(L,'e');
+
+    printf("\nList after deletion:\n");
     printList(L);
 
     return 0;
@@ -120,5 +125,14 @@ void insert(ListPtr A, char elem, int pos) {
 
 //this function will delete an element in the list
 void delete(ListPtr A, char elem) {
-
+    int ctr;
+    for (ctr = 0; ctr < A->count && A->elem[ctr] != elem; ctr++) {}
+    if (ctr < A->count) {
+        A->count--;
+        for (; ctr < A->count; ctr++) {
+            A->elem[ctr] = A->elem[ctr+1];
+        }
+    } else {
+        printf("\nElement does not exist!\n");
+    }
 }
