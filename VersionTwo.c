@@ -23,6 +23,7 @@ void bubbleSort(ListPtr A);
 void selectionSort(ListPtr A);
 void insert(ListPtr A, char elem, int pos);
 void delete(ListPtr A, char elem);
+int locate(ListPtr A, char elem);
 
 int main() {
     ListPtr L = initialize();
@@ -49,6 +50,14 @@ int main() {
 
     printf("\nList after deletion:\n");
     printList(L);
+
+    int ndx = locate(L, 'g');
+
+    if (ndx != -1) {
+        printf("\nThe element is at index %d\n", ndx);
+    } else {
+        printf("\nThe element does not exist\n");
+    }
 
     return 0;
 }
@@ -135,4 +144,14 @@ void delete(ListPtr A, char elem) {
     } else {
         printf("\nElement does not exist!\n");
     }
+}
+
+//this function will return the index of the element if found
+int locate(ListPtr A, char elem) {
+    int ctr;
+    for (ctr = 0; ctr < A->count && A->elem[ctr] != elem; ctr++) {}
+    if (ctr == A->count) {
+        ctr = -1;
+    }
+    return ctr;
 }
