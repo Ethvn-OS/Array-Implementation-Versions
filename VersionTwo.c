@@ -24,6 +24,7 @@ void selectionSort(ListPtr A);
 void insert(ListPtr A, char elem, int pos);
 void delete(ListPtr A, char elem);
 int locate(ListPtr A, char elem);
+char retrieve(ListPtr A, int pos);
 
 int main() {
     ListPtr L = initialize();
@@ -57,6 +58,14 @@ int main() {
         printf("\nThe element is at index %d\n", ndx);
     } else {
         printf("\nThe element does not exist\n");
+    }
+
+    char val = retrieve(L,0);
+
+    if (val != '\0') {
+        printf("\nThe value has been retrieved: %c\n", val);
+    } else {
+        printf("\nInvalid position\n");
     }
 
     return 0;
@@ -154,4 +163,9 @@ int locate(ListPtr A, char elem) {
         ctr = -1;
     }
     return ctr;
+}
+
+//this function will get the element at the given position
+char retrieve(ListPtr A, int pos) {
+    return (pos > 0 && pos <= A->count+1) ? A->elem[pos-1] : '\0';
 }
