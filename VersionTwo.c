@@ -21,6 +21,8 @@ ListPtr initialize();
 void printList(ListPtr A);
 void bubbleSort(ListPtr A);
 void selectionSort(ListPtr A);
+void insert(ListPtr A, char elem, int pos);
+void delete(ListPtr A, char elem);
 
 int main() {
     ListPtr L = initialize();
@@ -36,6 +38,11 @@ int main() {
     selectionSort(L);
 
     printf("\nSorted List:\n");
+    printList(L);
+
+    insert(L,'x',3);
+
+    printf("\nList with the inserted element:\n");
     printList(L);
 
     return 0;
@@ -91,4 +98,27 @@ void selectionSort(ListPtr A) {
             A->elem[ctr] = spot;
         }
     }
+}
+
+//this will insert an element at any position of the list, as long as it is valid and there is still space
+void insert(ListPtr A, char elem, int pos) {
+    if (A->count < MAX) {
+        if (pos > 0 && pos <= A->count+1) {
+            int spot = pos - 1;
+            int ctr;
+            for (ctr = A->count++; ctr > spot; ctr--) {
+                A->elem[ctr] = A->elem[ctr-1];
+            }
+            A->elem[ctr] = elem;
+        } else {
+            printf("\nInvalid position!\n");
+        }
+    } else {
+        printf("\nArray is full!\n");
+    }
+}
+
+//this function will delete an element in the list
+void delete(ListPtr A, char elem) {
+
 }
